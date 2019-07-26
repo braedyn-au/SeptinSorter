@@ -8,6 +8,7 @@ run("Trainable Weka Segmentation");
 //get path
 waitForUser("Hit Load Classifier, select the classifer, and do not close this popup until after");
 //call("trainableSegmentation.Weka_Segmentation.loadClassifier", "/Users/students/Downloads/spetinWEKAclassifier.model");
+waitForUser("Click ok if classifier is loading");
 loadclass = getBoolean("Has the classifier fully loaded?");
 while (loadclass != 1){
 	loadclass = getBoolean("Has the classifier fully loaded?");
@@ -39,10 +40,12 @@ for (i=0;i<n;i++){
 	close();
 }
 close("Classified image");
+close("Drawing of Classification result")
 con = getBoolean("Analyze another image?");
 while (con == 1){
 	waitForUser("Apply Classifier", "Hit Apply Classifier, select an image, select NO for probability map, and do not close the popup until after");
 	//call("trainableSegmentation.Weka_Segmentation.applyClassifier", newimg, title, "showResults=true", "storeResults=false", "probabilityMaps=false", "")
+	waitForUser("Click ok if the classifier is being applied.");
 	appclass = getBoolean("Has there been a classification result yet?");
 	while (appclass != 1){
 		appclass = getBoolean("Has there been a classification result yet?");
@@ -63,8 +66,8 @@ while (con == 1){
 		selectWindow(title); 
 		roiManager("Select", i);
 		run("Duplicate...", "title="+title+i);
-		var width = getWidth()
-		var height = getHeight()
+		var width = getWidth();
+		var height = getHeight();
 		if (width + height < 200){
 			run("Canvas Size...", "width=100 height=100 position=Center zero");
 		}
