@@ -11,16 +11,15 @@ from keras.models import load_model
 import shutil
 
 #IF WINDOWS OS THEN USE tkinter 
-#from tkinter import filedialog
-#from tkinter import *
+from tkinter import filedialog
+from tkinter import *
 
 #Import model
-model = load_model("./model/septinmodel.h5")
+model = load_model("./keras model/septinmodel.h5")
 
 #Load Image Directory
-#Tk().withdraw
-#path = askdirectory()
-path = "./imgs"
+path = filedialog.askdirectory()
+#path = "./images"
 goodDir = path+'/good/'
 badDir = path+'/bad/'
 if not os.path.exists(goodDir):

@@ -76,7 +76,7 @@ while (con == 1){
 	}
 	close("Classification result");
 	con = getBoolean("Analyze another image?");
-}
+	}
 end = getBoolean("Exit the application?");
 while (end !=1){
 	getBoolean("Macro language cant do anything from here, you must hit yes");
