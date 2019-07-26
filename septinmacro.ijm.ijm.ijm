@@ -4,7 +4,7 @@ title = getTitle();
 selectWindow(title);
 //run("Duplicate...", "title=duplicate");
 run("Trainable Weka Segmentation");
-selectWindow("Trainable Weka Segmentation v3.2.33");
+//selectWindow("Trainable Weka Segmentation v3.2.33");
 //get path
 waitForUser("Hit Load Classifier, select the classifer, and do not close this popup until after");
 //call("trainableSegmentation.Weka_Segmentation.loadClassifier", "/Users/students/Downloads/spetinWEKAclassifier.model");
@@ -28,7 +28,7 @@ for (i=0;i<n;i++){
 	//Name of super res image
 	selectWindow(title); 
 	roiManager("Select", i);
-	run("Duplicate...", "title="+title+i);
+	run("Duplicate...", "title="+title+i);https://github.com/braedyn-au/SeptinSorter.git
 	run("Canvas Size...", "width=100 height=100 position=Center zero");
 	//Define path
 	saveAs("Tiff", path+title+i+".tif");
