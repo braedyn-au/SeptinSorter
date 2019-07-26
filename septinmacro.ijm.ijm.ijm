@@ -28,8 +28,11 @@ for (i=0;i<n;i++){
 	//Name of super res image
 	selectWindow(title); 
 	roiManager("Select", i);
-	run("Duplicate...", "title="+title+i);https://github.com/braedyn-au/SeptinSorter.git
-	run("Canvas Size...", "width=100 height=100 position=Center zero");
+	run("Duplicate...", "title="+title+i);
+	width = getWidth();
+	height = getHeight();
+	if width + height < 200:
+		run("Canvas Size...", "width=100 height=100 position=Center zero");
 	//Define path
 	saveAs("Tiff", path+title+i+".tif");
 	close();
@@ -60,7 +63,8 @@ while (con == 1){
 		roiManager("Select", i);
 		run("Duplicate...", "title="+title+i);
 		//Define path
-		run("Canvas Size...", "width=100 height=100 position=Center zero");
+		if width + height < 200:
+			run("Canvas Size...", "width=100 height=100 position=Center zero");
 		saveAs("Tiff", path+title+i+".tif");
 		close();
 	}
