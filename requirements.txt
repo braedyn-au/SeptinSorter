@@ -1,0 +1,6 @@
+tensorflow
+tqdm
+numpy
+opencv-python
+keras
+pytest-shutil
