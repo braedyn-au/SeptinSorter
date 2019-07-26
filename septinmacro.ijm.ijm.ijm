@@ -29,6 +29,7 @@ for (i=0;i<n;i++){
 	selectWindow(title); 
 	roiManager("Select", i);
 	run("Duplicate...", "title="+title+i);
+	run("Canvas Size...", "width=100 height=100 position=Center zero");
 	//Define path
 	saveAs("Tiff", path+title+i+".tif");
 	close();
@@ -59,7 +60,7 @@ while (con == 1){
 		roiManager("Select", i);
 		run("Duplicate...", "title="+title+i);
 		//Define path
-		run("Canvas Size...", "width=100 height=100 position=Center");
+		run("Canvas Size...", "width=100 height=100 position=Center zero");
 		saveAs("Tiff", path+title+i+".tif");
 		close();
 	}
