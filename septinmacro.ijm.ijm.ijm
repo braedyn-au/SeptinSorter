@@ -1,6 +1,6 @@
 waitForUser("Select the first image to analyze");
 open();
-title = getTitle();
+title = getTitle(); 
 selectWindow(title);
 //run("Duplicate...", "title=duplicate");
 run("Trainable Weka Segmentation");
@@ -40,7 +40,7 @@ for (i=0;i<n;i++){
 	close();
 }
 close("Classified image");
-close("Drawing of Classification result")
+close("Drawing of Classification result");
 con = getBoolean("Analyze another image?");
 while (con == 1){
 	waitForUser("Apply Classifier", "Hit Apply Classifier, select an image, select NO for probability map, and do not close the popup until after");
