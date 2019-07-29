@@ -11,7 +11,7 @@ This installs all the packages required for the script, including tensorflow and
 # Trainable WEKA Segmentation
 Since the WEKA model is too large to upload on Github, I will find an alternative method and update this when I do. To train your own model, simply open up the plugin from Plugins-Segmentation-Trainable WEKA Segmentation. Using Fiji ROI selectors, you select a part of the image and add it to a class which acts as a label for the algorithm to train its classifier on. I have found it best to start a third class to label unwanted parts of the rings. Adding all the rings to one class, I overlap another class around each ring and label that as the unwanted parts. The final class is for background. 
 
-![class](./tutorial images/wekaexample.PNG)
+![class]("/tutorial images/wekaexample.PNG")
 Format: ![Alt Text](url)
 
 
