@@ -64,12 +64,16 @@ A folder named "keras model" will have been created with a  file named "septinmo
 
 # References
 Documentation about WEKA Trainable segmentation can be found at:
+
 https://imagej.net/Trainable_Weka_Segmentation
+
 dx.doi.org/10.1093%2Fbioinformatics%2Fbtx180
 
 Documentation about Keras can be found at:
+
 https://keras.io/
 
 Scripts were written by Braedyn Au for Ewer's Membrane Biochemistry Group at Freie Universität Berlin.
+
 braedyn.au@ucalgary.ca
 
