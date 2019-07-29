@@ -1,6 +1,7 @@
+msgpack
 tensorflow
 tqdm
-numpy
+numpy>=1.14.5
 opencv-python
 keras
 pytest-shutil
