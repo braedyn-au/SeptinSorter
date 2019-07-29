@@ -195,7 +195,7 @@ score = model.evaluate(img,lbl,verbose=0)
 print(score)
 
 #Save model
-dirName = './model'
+dirName = './keras model'
 if not os.path.exists(dirName):
     os.mkdir(dirName)
     print("Directory " , dirName ,  " Created ")
