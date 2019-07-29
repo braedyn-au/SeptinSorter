@@ -12,10 +12,14 @@ This installs all the packages required for the script, including tensorflow and
 Since the WEKA model is too large to upload on Github, I will find an alternative method and update this when I do. To train your own model, simply open up the plugin from Plugins-Segmentation-Trainable WEKA Segmentation. Using Fiji ROI selectors, you select a part of the image and add it to a class which acts as a label for the algorithm to train its classifier on. I have found it best to start a third class to label unwanted parts of the rings. Adding all the rings to one class, I overlap another class around each ring and label that as the unwanted parts. The final class is for background. 
 
 ![class](https://github.com/braedyn-au/SeptinSorter/blob/master/tutorial%20images/wekaexample.PNG)
-Format: ![Alt Text](url)
 
+**In the settings menu, select Balance Classes and click FastRandomForest to edit classifier options and change max depth to 8-15 layers**. 
 
-**In the settings menu, select Balance Classes and click FastRandomForest to edit classifier options and change max depth to 8-15 layers**. Train the classifier until you are happy with the results, and then save the classifier to your directory. The GUI and documentation can be referred to whenever needed.
+![options](https://github.com/braedyn-au/SeptinSorter/blob/master/tutorial%20images/editclassifier.PNG)
+
+Train the classifier until you are happy with the results, and then save the classifier to your directory. The GUI and documentation can be referred to whenever needed.
+
+![result](https://github.com/braedyn-au/SeptinSorter/blob/master/tutorial%20images/result.PNG)
 
 # Fiji Macro
 Once you have a satisfactory WEKA model, simply run the ImageJ macro and follow its instructions. Unfortunately, due to the linearlity of the macro language, it is easy to break so please do not close the prompts until you have completed each task. The Fiji Log will be important to watch the progress of the macro, such as the loaded model prompt near the beginning of the macro. Unfortunately, loading a WEKA model bottlenecks this entire process as it is extremely slow, however this step only occurs once as the same model can be used to analyze multiple images. Some parameters can be adjusted in the macro itself, such as *Particle Size* in the *Analzye Particles* step. The final result will be a folder in a directory of your choice containing 100x100px padded images of good and bad rings. Some manual post processing may be required, just ensure all the images are 100x100 px size as that is the only size supported by the algoirthm for now.
