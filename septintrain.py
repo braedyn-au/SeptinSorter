@@ -37,7 +37,8 @@ def train_data_with_label():
 
     good = train_data + 'good'
     bad = train_data + 'bad'
-    
+    ngood = 0
+    nbad = 0
     for i in os.listdir(good):
         if i.endswith('.DS_Store'):
             pass
@@ -46,6 +47,7 @@ def train_data_with_label():
             img = cv2.imread(path,cv2.IMREAD_GRAYSCALE)
             img = cv2.resize(img,(100,100))
             train_images.append([np.array(img), 1])
+            ngood = ngood + 1
             #print(i)
     for i in os.listdir(bad):
         if i.endswith('.DS_Store'):
@@ -55,7 +57,14 @@ def train_data_with_label():
             img = cv2.imread(path,cv2.IMREAD_GRAYSCALE)
             img = cv2.resize(img,(100,100))
             train_images.append([np.array(img),0])
+            nbad = nbad + 1
             #print(i)
+    # repeat good samples due to lack of data
+    if nbad > ngood:
+        n = round(nbad/ngood)
+        good_data = train_images[:ngood]
+        good_data = good_data*(n-1)
+        train_images = train_images + good_data
     shuffle(train_images)
     return train_images
 
@@ -98,8 +107,8 @@ def test_data_with_label():
 # In[170]:
 
 
-#reshaping might not be the best idea, maybe pad??
 training_images = train_data_with_label()
+shuffle(training_images)
 ##testing_images = test_data_with_label()
 
 
@@ -116,11 +125,11 @@ tr_lbl_data = np.array([i[1] for i in training_images])
 
 
 #convert to one hot label
-tr_lbl_data=keras.utils.to_categorical(tr_lbl_data, num_classes=None, dtype='float32')
+tr_lbl_data=keras.utils.to_categorical(tr_lbl_data, num_classes=2, dtype='float32')
 ##tst_lbl_data=keras.utils.to_categorical(tst_lbl_data, num_classes=None, dtype='float32')
 
 
-# In[189]:
+# In[189]
 
 
 ##print(tr_lbl_data.shape,tr_img_data.shape)
@@ -152,10 +161,10 @@ model.add(MaxPool2D(pool_size=(2,2),padding='same'))
 
 model.add(Dropout(0.25))
 model.add(Flatten())
-model.add(Dense(2,activation='relu'))
+model.add(Dense(64,activation='relu'))
 model.add(Dropout(rate=0.2))
 model.add(Dense(2,activation='softmax'))
-optimizer = Adam(lr=1e-5)
+optimizer = Adam(lr=1e-4)
 
 model.compile(optimizer=optimizer,loss='binary_crossentropy',metrics=['accuracy'])
 #model.fit(x=tr_img_data,y=tr_lbl_data,epochs=20,batch_size=5,validation_data=(tst_img_data,tst_lbl_data))
@@ -165,7 +174,7 @@ model.summary()
 # In[198]:
 
 
-model.fit(x=tr_img_data,y=tr_lbl_data,epochs=20,batch_size=1, validation_split=0.2)
+model.fit(x=tr_img_data,y=tr_lbl_data,epochs=20,batch_size=4, validation_split=0.2)
 
 
 # In[256]:
@@ -174,7 +183,7 @@ model.fit(x=tr_img_data,y=tr_lbl_data,epochs=20,batch_size=1, validation_split=0
 #subplot not necessary in final script
 #input data in this step and add function to seperate in os
 #fig = plt.figure(figsize=(14,14))
-imgs = training_images
+##imgs = training_images
 #for count, data in enumerate(imgs):
 #    y = fig.add_subplot(8,6,count+1)
 #    img = data[0]
@@ -189,11 +198,11 @@ imgs = training_images
 #    y.axes.get_xaxis().set_visible(False)
 #    y.axes.get_yaxis().set_visible(False)
 
-img =  np.array([i[0] for i in imgs]).reshape(-1,100,100,1)
-lbl = np.array([i[1] for i in imgs])
-lbl = keras.utils.to_categorical(lbl, num_classes=None, dtype='float32')
-score = model.evaluate(img,lbl,verbose=0)
-print(score[1])
+##img =  np.array([i[0] for i in imgs]).reshape(-1,100,100,1)
+##lbl = np.array([i[1] for i in imgs])
+##lbl = keras.utils.to_categorical(lbl, num_classes=2, dtype='float32')
+score = model.evaluate(tr_img_data,tr_lbl_data,verbose=0)
+print("Score: ",score[1])
 
 #Save model
 dirName = './keras model'

@@ -27,14 +27,14 @@ if not os.path.exists(goodDir):
     print("Directory ", goodDir, " Created ")
 else:    
     print("Directory " , goodDir ,  " already exists")
-    print("Overwriting previous folder...")
+    print("Adding to previous folder...")
 
 if not os.path.exists(badDir):
     os.mkdir(badDir)
     print("Directory ", badDir, " Created ")
 else:    
     print("Directory " , badDir ,  " already exists")
-    print("Overwriting previous folder...")
+    print("Adding to previous folder...")
 
 #Use Model to predict
 
