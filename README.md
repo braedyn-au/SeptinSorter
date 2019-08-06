@@ -32,7 +32,7 @@ python septinsort.py
 A prompt will appear where you will select the folder containing the images to be classified. The script runs and you will find your images sorted into good and bad folders.
 
 # Keras Training
-The keras model uploaded on this repository should be pretrained to suit ring sorting, however if you want to retrain a new model the process is simple. Training requires you to first manually label the 100x100px images as good vs bad rings. This will be done by sorting into folders labeled "good" and "bad" in both a train and test folder. Your directory should look similar to this:
+The keras model uploaded on this repository should be pretrained to suit ring sorting, however if you want to retrain a new model the process is simple. Training requires you to first manually label the 100x100px images as good vs bad rings. This will be done by sorting into folders labeled "good" and "bad" in a train folder. Your directory should look similar to this:
 ```bash
 |-- SeptinSorter
         |-- septintrain.py
@@ -46,15 +46,7 @@ The keras model uploaded on this repository should be pretrained to suit ring so
               |-- img3
               |-- img4
               |-- ...
-        |-- test
-            |-- good
-              |-- img5
-              |-- img6
-              |-- ...
-            |-- bad
-              |-- img7
-              |-- img8
-              |-- ...
+
 ```
 With the septintrain.py script in the same folder as test and train folders, simply run in Anaconda prompt:
 ```
