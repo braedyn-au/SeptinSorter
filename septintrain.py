@@ -66,6 +66,7 @@ def train_data_with_label():
 def test_data_with_label():
     '''
     labels each image in the test folder
+    not used
     '''
     test_images =[]
 
@@ -99,7 +100,7 @@ def test_data_with_label():
 
 #reshaping might not be the best idea, maybe pad??
 training_images = train_data_with_label()
-testing_images = test_data_with_label()
+##testing_images = test_data_with_label()
 
 
 # In[187]:
@@ -107,8 +108,8 @@ testing_images = test_data_with_label()
 
 tr_img_data = np.array([i[0] for i in training_images]).reshape(-1,100,100,1)
 tr_lbl_data = np.array([i[1] for i in training_images])
-tst_img_data = np.array([i[0] for i in testing_images]).reshape(-1,100,100,1)
-tst_lbl_data = np.array([i[1] for i in testing_images])
+##tst_img_data = np.array([i[0] for i in testing_images]).reshape(-1,100,100,1)
+##tst_lbl_data = np.array([i[1] for i in testing_images])
 
 
 # In[188]:
@@ -116,14 +117,14 @@ tst_lbl_data = np.array([i[1] for i in testing_images])
 
 #convert to one hot label
 tr_lbl_data=keras.utils.to_categorical(tr_lbl_data, num_classes=None, dtype='float32')
-tst_lbl_data=keras.utils.to_categorical(tst_lbl_data, num_classes=None, dtype='float32')
+##tst_lbl_data=keras.utils.to_categorical(tst_lbl_data, num_classes=None, dtype='float32')
 
 
 # In[189]:
 
 
-print(tr_lbl_data.shape,tr_img_data.shape)
-print(tr_lbl_data[4].shape)
+##print(tr_lbl_data.shape,tr_img_data.shape)
+##print(tr_lbl_data[4].shape)
 
 
 # In[190]:
@@ -151,8 +152,8 @@ model.add(MaxPool2D(pool_size=(2,2),padding='same'))
 
 model.add(Dropout(0.25))
 model.add(Flatten())
-#model.add(Dense(2,activation='relu'))
-#model.add(Dropout(rate=0.2))
+model.add(Dense(2,activation='relu'))
+model.add(Dropout(rate=0.2))
 model.add(Dense(2,activation='softmax'))
 optimizer = Adam(lr=1e-5)
 
@@ -164,7 +165,7 @@ model.summary()
 # In[198]:
 
 
-model.fit(x=tr_img_data,y=tr_lbl_data,epochs=20,batch_size=1,validation_data=(tst_img_data,tst_lbl_data))
+model.fit(x=tr_img_data,y=tr_lbl_data,epochs=20,batch_size=1, validation_split=0.2)
 
 
 # In[256]:
@@ -173,7 +174,7 @@ model.fit(x=tr_img_data,y=tr_lbl_data,epochs=20,batch_size=1,validation_data=(ts
 #subplot not necessary in final script
 #input data in this step and add function to seperate in os
 #fig = plt.figure(figsize=(14,14))
-imgs = testing_images + training_images
+imgs = training_images
 #for count, data in enumerate(imgs):
 #    y = fig.add_subplot(8,6,count+1)
 #    img = data[0]
@@ -192,7 +193,7 @@ img =  np.array([i[0] for i in imgs]).reshape(-1,100,100,1)
 lbl = np.array([i[1] for i in imgs])
 lbl = keras.utils.to_categorical(lbl, num_classes=None, dtype='float32')
 score = model.evaluate(img,lbl,verbose=0)
-print(score)
+print(score[1])
 
 #Save model
 dirName = './keras model'
